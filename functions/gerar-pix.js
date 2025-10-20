@@ -1,53 +1,44 @@
-// functions/gerar-pix.js
-exports.handler = async (event, context) => {
+const axios = require("axios");
+
+exports.handler = async function (event, context) {
   try {
-    // Lê o corpo da requisição (JSON)
-    const data = event.body ? JSON.parse(event.body) : {};
+    // Variáveis de ambiente definidas no Netlify
+    const WOOVI_APPID = process.env.WOOVI_APPID;
+    const WOOVI_CLIENTID = process.env.WOOVI_CLIENTID;
 
     // Valor fixo do Pix
-    const valor = 36.60;
+    const valorPix = 36.60;
 
-    // Você pode receber CPF ou outros dados se quiser
-    const cpf = data.cpf || "00000000000";
-
-    // Aqui você chamaria sua API do Pix
-    // Exemplo fictício de retorno
-    const pixResponse = {
-      qrCode: "00020126580014BR.GOV.BCB.PIX0114+5561999999995204000053039865802BR5925Nome do Beneficiário6009Cidade6009BR6304ABCD",
-      valor,
-      cpf
+    // Criar payload para gerar Pix
+    const payload = {
+      amount: valorPix,
+      clientId: WOOVI_CLIENTID,
+      // Aqui você pode adicionar mais campos necessários pela API Woovi
+      description: "Pagamento Quiz Promocional",
     };
 
+    // Chamada à API Woovi
+    const response = await axios.post(
+      "https://api.woovi.com.br/v1/pix", // Endpoint Woovi
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-WOOVI-APPID": WOOVI_APPID,
+        },
+      }
+    );
+
+    // Retorna dados do Pix (como QR Code)
     return {
       statusCode: 200,
-      body: JSON.stringify(pixResponse)
+      body: JSON.stringify(response.data),
     };
-
   } catch (error) {
-    console.error("Erro função:", error);
+    console.error("Erro ao gerar Pix:", error.message);
     return {
-      statusCode: 400,
-      body: JSON.stringify({ error: error.message })
+      statusCode: 500,
+      body: JSON.stringify({ error: "Erro ao gerar Pix. Consulte o console." }),
     };
   }
 };
-```E0F
-
----
-
-### Observações importantes:
-
-1. **Não precisa do `req.body`**, use sempre `event.body`.
-2. O valor está fixo em **36,60**.
-3. Se o frontend não enviar JSON, o código não quebra: `data` será um objeto vazio.
-4. Lembre de **atualizar o fetch do frontend** para o caminho correto:  
-
-```js
-fetch("/.netlify/functions/gerar-pix", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ cpf: "12345678900" })
-})
-.then(res => res.json())
-.then(data => console.log(data))
-.catch(err => console.error(err));
