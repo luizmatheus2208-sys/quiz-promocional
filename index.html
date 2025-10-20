@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quiz Promocional — Ganhe até R$732</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Quiz TikTok</h1>
+      <p>Responda 7 perguntas e concorra a até <strong>R$732,00</strong></p>
+    </header>
+
+    <section id="start-screen" class="card">
+      <button id="start-btn" class="primary-btn">Iniciar quiz — Ganhe até R$732,00</button>
+    </section>
+
+    <section id="quiz-screen" class="card hidden">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div id="progress">Pergunta <span id="q-num">1</span>/7</div>
+      <h2 id="question-title"></h2>
+      <div id="answers"></div>
+      <div class="controls">
+        <button id="next-btn" class="secondary-btn">Próxima</button>
+      </div>
+    </section>
+
+    <section id="result-screen" class="card hidden">
+      <div class="trophy">🏆</div>
+      <h2>Parabéns!</h2>
+      <p id="result-text"></p>
+      <div id="prize-box" class="prize-box"></div>
+
+      <h3>Para receber seu prêmio</h3>
+      <p>Insira apenas sua <strong>chave Pix (CPF)</strong></p>
+
+      <div id="claim-section">
+        <input type="text" id="cpf" placeholder="Somente números (ex: 12345678901)" maxlength="11" />
+        <button id="cpf-continue" class="primary-btn">Continuar</button>
+      </div>
+
+      <div id="payment-section" class="hidden">
+        <p>Taxa de saque <strong>5%:</strong> R$36,60.</p>
+        <p>Valor bruto: R$732,00</p>
+        <p>Valor líquido (após 5%): R$ 695,40</span></p>
+
+        <button id="pay-btn" class="primary-btn">Realizar pagamento para liberar prêmio</button>
+
+        <div id="pix-result" class="hidden">
+          <p>Pix gerado!</p>
+          <img id="qrCode" src="" alt="QR Code Pix" />
+          <div id="pix-code" class="pix-code"></div>
+          <button id="copy-pix" class="secondary-btn">Copiar código Pix</button>
+          <!-- Link de pagamento removido -->
+        </div>
+      </div>
+
+      <button id="restart-btn" class="secondary-btn">Fazer novamente</button>
+    </section>
+
+    <footer>
+      <small>Promoção sujeita a regras. Verifique termos e condições offline.</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

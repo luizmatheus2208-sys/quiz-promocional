@@ -1,0 +1,95 @@
+:root{
+  --bg:#0f1724;
+  --card:#0b0f17;
+  --primary:#fe2c55;
+  --accent:#25f4ee;
+  --muted:#9ca3af;
+  --radius:12px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#05060a,#0a0b10);
+  color:#fff;
+  padding:20px;
+  -webkit-font-smoothing:antialiased;
+}
+.container{max-width:720px;margin:0 auto}
+header{text-align:center;margin-bottom:18px}
+h1{color:var(--primary);margin:6px 0;font-size:22px}
+p{color:var(--muted)}
+
+.card{
+  background:linear-gradient(180deg,#071021,#081426);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  margin-bottom:14px;
+}
+
+.hidden{display:none}
+
+.primary-btn, .secondary-btn{
+  display:inline-block;
+  padding:12px 18px;
+  border-radius:999px;
+  border:0;
+  font-weight:700;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.primary-btn{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+  box-shadow:0 8px 20px rgba(254,44,85,0.12);
+}
+.secondary-btn{
+  background:transparent;color:var(--primary);border:1px solid rgba(255,255,255,0.06)
+}
+
+#answers{margin-top:12px;display:grid;gap:10px}
+.answer{
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.03);
+  cursor:pointer;
+  background: #111622;
+  color: #fff;   /* branco para contraste */
+  transition: 0.2s;
+}
+.answer:hover{
+  background: #1f2533;
+}
+.answer.selected{
+  outline:3px solid var(--primary);
+  background: #24172f;
+}
+
+.controls{display:flex;justify-content:flex-end;margin-top:12px}
+.progress-bar{width:100%;background:#081018;height:10px;border-radius:999px;margin-bottom:12px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .3s}
+
+.prize-box{margin:12px 0;padding:12px;border-radius:10px;background:linear-gradient(90deg,#111218,#061018);border:1px solid rgba(255,255,255,0.03);font-weight:700;font-size:18px}
+.pix-code{margin-top:10px;padding:10px;background:#061018;border-radius:8px;font-family:monospace;word-break:break-all}
+#qrCode{max-width:240px;margin-top:10px}
+
+/* CPF input bonito */
+#claim-section input[type="text"]{
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:#111622;
+  color:#fff;
+  font-size:16px;
+  width:100%;
+  margin-bottom:12px;
+}
+#claim-section input:focus{
+  outline:none;
+  border-color:var(--primary);
+}
+
+footer{ text-align:center;color:var(--muted);font-size:13px;margin-top:6px}
+@media (max-width:420px){.primary-btn,.secondary-btn{width:100%}}
